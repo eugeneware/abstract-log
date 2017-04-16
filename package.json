@@ -1,0 +1,16 @@
+{
+  "scripts": {
+    "lint": "semistandard",
+    "test": "tape test/**/*.js",
+    "watch": "onchange -i './**/*.js' 'test/**/*.js' -- npm test"
+  },
+  "dependencies": {
+    "pn": "^1.0.0",
+    "tape": "^4.6.3",
+    "tape-promise": "^2.0.1"
+  },
+  "devDependencies": {
+    "onchange": "^3.2.1",
+    "semistandard": "^10.0.0"
+  }
+}
