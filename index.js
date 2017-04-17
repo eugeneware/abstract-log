@@ -29,7 +29,7 @@ AbstractLog.prototype.createReadStream = function (offset = 0) {
   let i = offset;
   rs._read = () => {
     if (i < this.tail) {
-      rs.push(this.log[i]);
+      rs.push({ key: i, value: this.log[i] });
       i++;
     } else {
       rs.push(null);
