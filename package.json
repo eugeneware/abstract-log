@@ -11,6 +11,7 @@
   },
   "devDependencies": {
     "onchange": "^3.2.1",
-    "semistandard": "^10.0.0"
+    "semistandard": "^10.0.0",
+    "stream-to-promise": "^2.2.0"
   }
 }
