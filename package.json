@@ -1,8 +1,8 @@
 {
   "scripts": {
     "lint": "semistandard",
-    "test": "tape test/**/*.js",
-    "watch": "onchange -i './**/*.js' 'test/**/*.js' -- npm test"
+    "test": "tape test/*.js",
+    "watch": "onchange -i './**/*.js' -- npm test"
   },
   "dependencies": {
     "pn": "^1.0.0",
@@ -10,6 +10,7 @@
     "tape-promise": "^2.0.1"
   },
   "devDependencies": {
+    "array-to-stream": "^1.0.2",
     "onchange": "^3.2.1",
     "semistandard": "^10.0.0",
     "stream-to-promise": "^2.2.0"
