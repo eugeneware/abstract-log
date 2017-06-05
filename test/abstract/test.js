@@ -51,4 +51,3 @@ module.exports = (it, logImpl) => {
     t.end();
   });
 };
-

@@ -1,19 +1,38 @@
 {
+  "name": "abstract-log",
+  "version": "1.0.0",
+  "description": "An abstract interface to build data processing applications on a log-based architecture.",
+  "main": "index.js",
   "scripts": {
     "lint": "semistandard",
     "test": "tape test/*.js",
     "watch": "onchange -i './**/*.js' -- npm test"
   },
-  "dependencies": {
-    "pn": "^1.0.0",
-    "tape": "^4.6.3",
-    "tape-promise": "^2.0.1"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eugeneware/abstract-log"
   },
+  "keywords": [
+    "abstract-log",
+    "log",
+    "logs",
+    "logging",
+    "kafka",
+    "append-only",
+    "database"
+  ],
+  "author": "Eugene Ware <eugene@noblesamurai.com>",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/eugeneware/abstract-log/issues"
+  },
+  "dependencies": {},
   "devDependencies": {
     "array-to-stream": "^1.0.2",
     "onchange": "^3.2.1",
     "semistandard": "^11.0.0",
-    "stream-to-promise": "^2.2.0"
-  },
-  "false": {}
+    "stream-to-promise": "^2.2.0",
+    "tape": "4.6.3",
+    "tape-promise": "^2.0.1"
+  }
 }

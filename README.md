@@ -2,6 +2,8 @@
 
 An abstract interface to build data processing applications on a log-based architecture.
 
+[![build status](https://secure.travis-ci.org/eugeneware/abstract-log.png)](http://travis-ci.org/eugeneware/abstract-log)
+
 The idea would be to have implementations that would allow reading/writing to files, databases, kafka, redis, etc.
 
 ## Status
