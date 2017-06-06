@@ -5,8 +5,10 @@ module.exports = (it, common) => {
   it('should be able to append to the log', async (t) => {
     t.plan(1);
     let log = await common.setup(t);
+    await log.open();
     let offset = await log.append({ msg: 'hello world' });
     t.equal(offset, 0);
+    await log.close();
     await common.teardown(t, log);
     t.end();
   });
@@ -17,6 +19,7 @@ module.exports = (it, common) => {
     let offset = await log.append({ msg: 'hello world' });
     let data = await log.get(offset);
     t.deepEqual(data, { msg: 'hello world' });
+    await log.close();
     await common.teardown(t, log);
     t.end();
   });
@@ -26,6 +29,7 @@ module.exports = (it, common) => {
 
     let startFrom;
     let log = await common.setup(t);
+    await log.open();
     let expected = [];
     for (let i = 0; i < 5; i++) {
       let data = { msg: `hello world ${i}` };
@@ -36,6 +40,7 @@ module.exports = (it, common) => {
 
     let results = await streamToPromise(log.createReadStream({ offset: startFrom }));
     t.deepEqual(results, expected);
+    await log.close();
     await common.teardown(t, log);
     t.end();
   });
@@ -44,6 +49,7 @@ module.exports = (it, common) => {
     t.plan(6);
 
     let log = await common.setup(t);
+    await log.open();
     await streamToPromise(
       arrayToStream([0, 1, 2, 3, 4].map((i) => ({ msg: `hello world ${i}` })))
         .pipe(log.createWriteStream())
@@ -53,6 +59,7 @@ module.exports = (it, common) => {
       t.deepEqual(data, { offset: i, value: { msg: `hello world ${i}` } });
     });
     t.equal(results.length, 5);
+    await log.close();
     await common.teardown(t, log);
     t.end();
   });
