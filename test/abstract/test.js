@@ -51,13 +51,14 @@ module.exports = (it, common) => {
 
     let log = await common.setup(t);
     await log.open();
+    // TODO: get offsets as an event stream
     await streamToPromise(
       arrayToStream([0, 1, 2, 3, 4].map((i) => ({ msg: `hello world ${i}` })))
         .pipe(log.createWriteStream())
     );
     let results = await streamToPromise(log.createReadStream());
     results.forEach((data, i) => {
-      t.deepEqual(data, { offset: i, value: { msg: `hello world ${i}` } });
+      t.deepEqual(data.value, { msg: `hello world ${i}` });
     });
     t.equal(results.length, 5);
     await log.close();
