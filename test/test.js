@@ -4,10 +4,10 @@ const memLog = require('../mem-log');
 const test = require('..');
 
 const common = {
-  setup: async () => {
+  setup: async (t) => {
     return memLog();
   },
-  teardown: async () => {
+  teardown: async (t, log) => {
   }
 };
 
