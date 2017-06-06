@@ -3,4 +3,12 @@ const it = require('tape-promise').default(tape);
 const memLog = require('../mem-log');
 const test = require('..');
 
-test(it, memLog);
+const common = {
+  setup: async () => {
+    return memLog();
+  },
+  teardown: async () => {
+  }
+};
+
+test(it, common);

@@ -1,44 +1,49 @@
 const streamToPromise = require('stream-to-promise');
 const arrayToStream = require('array-to-stream');
 
-module.exports = (it, logImpl) => {
+module.exports = (it, common) => {
   it('should be able to append to the log', async (t) => {
     t.plan(1);
-    let log = logImpl();
+    let log = await common.setup();
     let offset = await log.append({ msg: 'hello world' });
     t.equal(offset, 0);
+    await common.teardown();
     t.end();
   });
 
   it('should be able to read from a log offset', async (t) => {
     t.plan(1);
-    let log = logImpl();
+    let log = await common.setup();
     let offset = await log.append({ msg: 'hello world' });
     let data = await log.get(offset);
     t.deepEqual(data, { msg: 'hello world' });
+    await common.teardown();
     t.end();
   });
 
   it('should be able to stream from a log offset', async (t) => {
-    t.plan(6);
+    t.plan(1);
 
-    let log = logImpl();
+    let startFrom;
+    let log = await common.setup();
+    let expected = [];
     for (let i = 0; i < 5; i++) {
-      await log.append({ msg: `hello world ${i}` });
+      let data = { msg: `hello world ${i}` };
+      let offset = await log.append(data);
+      if (i === 3) startFrom = offset;
+      if (i >= 3) expected.push({ offset, value: data });
     }
 
-    let results = await streamToPromise(log.createReadStream());
-    results.forEach((data, i) => {
-      t.deepEqual(data, { offset: i, value: { msg: `hello world ${i}` } });
-    });
-    t.equal(results.length, 5);
+    let results = await streamToPromise(log.createReadStream({ offset: startFrom }));
+    t.deepEqual(results, expected);
+    await common.teardown();
     t.end();
   });
 
   it('should be able to write a stream to the log', async (t) => {
     t.plan(6);
 
-    let log = logImpl();
+    let log = await common.setup();
     await streamToPromise(
       arrayToStream([0, 1, 2, 3, 4].map((i) => ({ msg: `hello world ${i}` })))
         .pipe(log.createWriteStream())
@@ -48,6 +53,7 @@ module.exports = (it, logImpl) => {
       t.deepEqual(data, { offset: i, value: { msg: `hello world ${i}` } });
     });
     t.equal(results.length, 5);
+    await common.teardown();
     t.end();
   });
 };
