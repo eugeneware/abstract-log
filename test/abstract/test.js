@@ -16,6 +16,7 @@ module.exports = (it, common) => {
   it('should be able to read from a log offset', async (t) => {
     t.plan(1);
     let log = await common.setup(t);
+    await log.open();
     let offset = await log.append({ msg: 'hello world' });
     let data = await log.get(offset);
     t.deepEqual(data, { msg: 'hello world' });
