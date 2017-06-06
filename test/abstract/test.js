@@ -7,7 +7,7 @@ module.exports = (it, common) => {
     let log = await common.setup(t);
     await log.open();
     let offset = await log.append({ msg: 'hello world' });
-    t.equal(offset, 0);
+    t.ok(typeof(offset) !== 'undefined', 'expecting a valid offset');
     await log.close();
     await common.teardown(t, log);
     t.end();
