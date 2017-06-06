@@ -26,13 +26,14 @@
   "bugs": {
     "url": "https://github.com/eugeneware/abstract-log/issues"
   },
-  "dependencies": {},
-  "devDependencies": {
+  "dependencies": {
     "array-to-stream": "^1.0.2",
+    "stream-to-promise": "^2.2.0",
+    "tape-promise": "^2.0.1"
+  },
+  "devDependencies": {
     "onchange": "^3.2.1",
     "semistandard": "^11.0.0",
-    "stream-to-promise": "^2.2.0",
-    "tape": "4.6.3",
-    "tape-promise": "^2.0.1"
+    "tape": "4.6.3"
   }
 }
