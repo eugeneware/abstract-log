@@ -1,6 +1,6 @@
 {
   "name": "abstract-log",
-  "version": "3.0.3",
+  "version": "3.0.4",
   "description": "An abstract interface to build data processing applications on a log-based architecture.",
   "main": "index.js",
   "scripts": {
